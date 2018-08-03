@@ -1,20 +1,9 @@
 import React, {Component} from 'react'
-import * as BooksAPI from './BooksAPI'
+//import * as BooksAPI from './BooksAPI'
 
 class Book extends Component {
-  //Uses option buttons to change the bookshelf book is on
-  selectShelf = (shelf) => {
-    console.log(this)
-    //update BooksAPI
-    BooksAPI.update(this.props.book, shelf)
-    this.setState({ currentShelf: shelf })
-    //this.props.restockShelves()
-    //update the book state
-    this.props.books.update
-    //reset the books on the shelf
-    BooksAPI.getAll(this.props.book)
-    this.setState({ book: book  })
-  }
+
+ //this.props.restockShelves()
 
   render(){
     return(
@@ -26,8 +15,8 @@ class Book extends Component {
 
             </div>
             <div className="book-shelf-changer">
-              <select value={this.props.currentShelf} onChange={(event) => this.selectShelf(event.target.value)}>
-                <option value="move">Move to...</option>
+              <select value={this.props.book.shelf} onChange={(event) => this.props.selectShelf(this.props.book, event.target.value)}>
+                <option value="move" disabled>Move to...</option>
                 <option value="currentlyReading">Currently Reading</option>
                 <option value="wantToRead">Want to Read</option>
                 <option value="read">Read</option>

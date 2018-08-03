@@ -28,14 +28,28 @@ class BooksApp extends React.Component{
     })
   }
 
+ //This function needs to be passed from parent to child components to allow shelf selection
+  selectShelf = (book,shelf) => {
+    //console.log(this)
+    //update function
+    BooksAPI.update(book,shelf);
+     this.setState({ currentShelf: shelf })
+    console.log(shelf)
+
+    BooksAPI.getAll().then((books)=>{
+      this.setState({ books: books })
+    })
+ }
+
+
   render() {
     return (
       <div>
         <Route exact path='/' render={() => (
-          <Home books={this.state.books} selectShelf={this.props.selectShelf} restockShelves={this.restockShelves.bind(this)} />
+          <Home books={this.state.books} selectShelf={this.selectShelf} currentShelf={this.state.currentShelf} />
         )}/>
         <Route exact path='/search' render={() => (
-          <Search books={this.state.books} queryResult={this.state.queryResult} selectShelf={this.selectShelf} restockShelves={this.restockShelves.bind(this)} />
+          <Search books={this.state.books} queryResult={this.state.queryResult} selectShelf={this.selectShelf}  currentShelf={this.state.currentShelf}/>
         )}/>
      </div>
     )

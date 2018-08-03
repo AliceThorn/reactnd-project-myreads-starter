@@ -20,6 +20,11 @@ class Search extends Component {
     BooksAPI.search(query).then((queryResult) => {
       //shows an empty array if there are no matches in the search
       if (Array.isArray(queryResult)) {
+       // console.log(this.state.queryResult)
+        queryResult = queryResult.map(book => {book.shelf = "none"
+                                               return book })
+        //queryResult = queryResult.filter(book => {book.shelf === this.props.book.shelf
+                                         //return book})
         this.setState({ queryResult: queryResult })
       } else {
         this.setState({ queryResult: [] })
@@ -40,9 +45,8 @@ class Search extends Component {
 
           <ol className="books-grid">
           {this.state.queryResult.map(book =>(
-            <li key={book.id}>
-              <Book book={book} queryResult={this.state.queryResult} selectShelf={this.selectShelf} restockShelves={this.props.restockShelves.bind(this)} />
-
+              <li key={book.id} >
+              <Book book={book} queryResult={this.state.queryResult}  currentShelf={this.props.currentShelf} selectShelf={this.props.selectShelf} />
             </li>
           ))  }
         </ol>
