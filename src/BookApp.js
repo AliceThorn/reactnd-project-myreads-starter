@@ -12,15 +12,6 @@ class BooksApp extends React.Component{
     books: []
   }
 
-//resets the shelves when a change is made
-  //restockShelves() {
- // console.log("Restocking shelves")
- //   BooksAPI.getAll().then((books) => {
-   // console.log(books)
-   // this.setState({ books: books })
-   // })
-  //}
-
   componentDidMount() {
     //console.log(BooksAPI.getAll())
     BooksAPI.getAll().then((books) => {
@@ -41,15 +32,14 @@ class BooksApp extends React.Component{
     })
  }
 
-
   render() {
     return (
       <div>
         <Route exact path='/' render={() => (
-          <Home books={this.state.books} selectShelf={this.selectShelf} currentShelf={this.state.currentShelf} />
+          <Home books={this.state.books} selectShelf={this.selectShelf} onShelf={this.state.shelf} />
         )}/>
         <Route exact path='/search' render={() => (
-          <Search books={this.state.books} queryResult={this.state.queryResult} selectShelf={this.selectShelf}  currentShelf={this.state.currentShelf}/>
+          <Search books={this.state.books} selectShelf={this.selectShelf}  onShelf={this.state.shelf}/>
         )}/>
      </div>
     )
