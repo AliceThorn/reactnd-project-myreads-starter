@@ -12,6 +12,16 @@ class Search extends Component {
     queryResult: []
   }
 
+//function to determine if the books returned from the search have the correct shelf
+   searchShelf = book => { if (book.id===this.state.queryResult.id) {
+                           book.shelf = this.props.book.shelf
+                            return book
+                       }else{
+                         book.shelf = "none"
+                           return book
+                            }
+                      }
+
 //updates the results of the search
   updateQueryResult = (query) => {
     this.setState({ query: query });
@@ -20,11 +30,8 @@ class Search extends Component {
     BooksAPI.search(query).then((queryResult) => {
       //shows an empty array if there are no matches in the search
       if (Array.isArray(queryResult)) {
-       // console.log(this.state.queryResult)
-        queryResult = queryResult.map(book => {book.shelf = "none"
-                                               return book })
-        //queryResult = queryResult.filter(book => {book.shelf === this.props.book.shelf
-                                         //return book})
+       console.log(this.state.queryResult)
+        queryResult = queryResult.map(this.searchShelf)
         this.setState({ queryResult: queryResult })
       } else {
         this.setState({ queryResult: [] })
