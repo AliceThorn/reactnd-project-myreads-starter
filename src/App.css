@@ -10,6 +10,10 @@ body, .app {
 
 /* main page */
 
+.search-icon{
+  text-align: right;
+}
+
 .list-books-title {
   padding: 10px 0;
   background: #2e7c31;
