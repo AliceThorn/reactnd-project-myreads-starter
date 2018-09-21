@@ -2,6 +2,9 @@ import React, {Component} from 'react'
 import Book from './Book';
 
 class Bookshelf extends Component {
+  static defaultProps = {
+    books: [],
+  }
   render(){
     return(
       <div className="bookshelf">
@@ -10,7 +13,7 @@ class Bookshelf extends Component {
           <ol className="books-grid">
           {this.props.books.map(book =>(
             <li key={book.id}>
-              <Book book={book} selectShelf={this.selectShelf} />
+              <Book book={book} onShelf={book.shelf} selectShelf={this.props.selectShelf} />
             </li>
           )
           )
